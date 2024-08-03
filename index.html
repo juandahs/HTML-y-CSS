@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <form>
+            <table width="500" id="enfasis-columna">
+                <!-- Titulo del formulario -->
+                <tr>
+                    <td colspan="2">
+                        <h2>Formulario de registro</h2>
+                    </td>
+                    <td></td>
+                </tr>
+                <!-- nombre de usuario input -->
+                <tr>
+                    <td class="columna"><label>Usuario:(*)</label></td>
+                    <td><input type="text" id="usuario" placeholder="ingrese el usuario" required></td>
+                </tr>
+                <!-- contraseña Input type password-->
+                <tr>
+                    <td class="columna"><label>Contraseña:(*)</label></td>
+                    <td><input type="password" id="contraseña" placeholder="ingrese la contraseña" required></td>
+                </tr>
+                <!-- Tecnologías Checkbox-->
+                <tr>
+                    <td class="columna"><label>Tecnologías de Internet:(*)</label></td>
+                    <!-- &nbsp; comando para que el navegaro entienda el espacio en blanco -->
+                    <td>
+                        JAVA <input type="checkbox" name="tecnologia" value="java">&nbsp;
+                        PHP <input type="checkbox" name="tecnologia" value="php">&nbsp;
+                        JS <input type="checkbox" name="tecnologia" value="js">&nbsp;
+                        .NET <input type="checkbox" name="tecnologia" value=".net">&nbsp;
+                    </td>
+                </tr>
+                <!-- genero RadioButton-->
+                <tr>
+                    <td class="columna"><label>Genero:(*)</label></td>
+                    <td>
+                        Mujer<input type="radio" name="genero" value="M">
+                        Hombre<input type="radio" name="genero" value="H">
+                    </td>
+                </tr>
+                <!-- ocupación SELECT-->
+                <tr>
+                    <td class="columna"> Ocupación: (*)</td>
+                    <td>
+                        <select name="ocupacion">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="">Seleccionar</option>
+                            <option value="1">Estudiante</option>
+                            <option value="2">Profesor</option>
+                            
+                            <option value="3">Jubilado</option>
+                            <option value="4">Ingeniero</option>
+                            <option value="4">Otro</option>
+                        </select>
+                    </td>
+                </tr>
+                <!-- Comentarios -->
+                <tr>
+                    <td class="columna">Comentarios:</td>
+                    <td>
+                        <textarea name="comentarios" cols="21">
+
+                        </textarea>
+                    </td>
+                </tr>
+                <tr class="footer">
+                    <td>
+                        <input type="reset" class="default" />
+                    </td>
+                    <td>
+                        <input type="submit" class="default">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+
+</html>
