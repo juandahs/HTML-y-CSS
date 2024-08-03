@@ -1,3 +1,18 @@
+/*
+    (#enfasis-columana es el id de la tabla)
+    para acceder a items dentro de items se da espacio y se agrega el selector
+    #enfasis-columna td
+
+    Cuando se esta trabajando con valores de padding que pide hasta 4 valores 
+    Si son 2 el primer valor hace referencia a lo horizontal (top bottom), el segundo valor hacer valor a lo vertical (rigth left)
+    Si tiene los 4 valores van en el siguiente orden (top - rigth - bottom - left)
+
+    justify-content => alinear elementos en el eje principal  (x-horizontal) 
+    align-content   => alinear elementos en el eje secundario (y-vertical)    
+
+*/
+
+
 /* Definir la paleta de colores en CSS */
 :root {
     --color-backgound: #2C3140; /* Color de fondo */
@@ -30,17 +45,6 @@ body {
     text-align: center;
 }
 
-/*
-    (#enfasis-columana es el id de la tabla)
-    para acceder a items dentro de items se da espacio y se agrega el selector
-    #enfasis-columna td
-
-    Cuando se esta trabajando con valores de padding que pide hasta 4 valores 
-    Si son 2 el primer valor hace referencia a lo horizontal (top bottom), el segundo valor hacer valor a lo vertical (rigth left)
-    Si tiene los 4 valores van en el siguiente orden (top - rigth - bottom - left)
-    
-*/
-
 form {
     width: 100%;
     max-width: 500px;
@@ -48,7 +52,6 @@ form {
     background-color: var(--color-1);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 /*titulo del formulario*/
 h2 {
@@ -66,7 +69,7 @@ td {
     vertical-align: top;
 }
 
-
+/*se selecciona todos los selectores de un type espeficico*/
 input[type="text"],
 input[type="password"],
 textarea,
