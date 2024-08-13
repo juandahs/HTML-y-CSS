@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <link rel="stylesheet" href="src/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="src/css/styles.css">
+    <!-- el tipo es depende del navegador -->
     <title>Document</title>
 </head>
 
 <body>
-    <center>
-        <form>
+        <form action="pagina2.html" method="post", onsubmit="return validarFormulario(this)" id="formulario">
             <table width="500" id="enfasis-columna">
                 <!-- Titulo del formulario -->
                 <tr>
@@ -22,7 +22,8 @@
                 <!-- nombre de usuario input -->
                 <tr>
                     <td class="columna"><label>Usuario:(*)</label></td>
-                    <td><input type="text" id="usuario" placeholder="ingrese el usuario" required></td>
+                    <!-- el name se trabaja como variable el id se trabaja como etiqueta -->
+                    <td><input type="text" id="usuario" name="usuario" placeholder="ingrese el usuario"></td>
                 </tr>
                 <!-- contraseña Input type password-->
                 <tr>
@@ -56,8 +57,7 @@
                             <option value="">-- Seleccionar --</option>
                             <option value="">Seleccionar</option>
                             <option value="1">Estudiante</option>
-                            <option value="2">Profesor</option>
-                            
+                            <option value="2">Profesor</option>                            
                             <option value="3">Jubilado</option>
                             <option value="4">Ingeniero</option>
                             <option value="4">Otro</option>
@@ -83,7 +83,8 @@
                 </tr>
             </table>
         </form>
-    </center>
+    <script type="text/javascript" src="src/js/index.js"></script>
+
 </body>
 
 </html>
