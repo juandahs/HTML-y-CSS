@@ -10,7 +10,7 @@
 </head>
 
 <body>
-        <form action="pagina2.html" method="post", onsubmit="return validarFormulario(this)" id="formulario">
+        <form action="pagina2.html" method="post" onsubmit="return validarFormulario(this)" id="formulario">
             <table width="500" id="enfasis-columna">
                 <!-- Titulo del formulario -->
                 <tr>
@@ -28,7 +28,7 @@
                 <!-- contraseña Input type password-->
                 <tr>
                     <td class="columna"><label>Contraseña:(*)</label></td>
-                    <td><input type="password" id="contraseña" placeholder="ingrese la contraseña" required></td>
+                    <td><input type="password" id="password" name='password' placeholder="ingrese la contraseña" required></td>
                 </tr>
                 <!-- Tecnologías Checkbox-->
                 <tr>
@@ -45,8 +45,8 @@
                 <tr>
                     <td class="columna"><label>Genero:(*)</label></td>
                     <td>
-                        Mujer<input type="radio" name="genero" value="M">
-                        Hombre<input type="radio" name="genero" value="H">
+                        Mujer<input type="radio" name="genero" value="Mujer">
+                        Hombre<input type="radio" name="genero" value="Hombre">
                     </td>
                 </tr>
                 <!-- ocupación SELECT-->
@@ -55,12 +55,11 @@
                     <td>
                         <select name="ocupacion">
                             <option value="">-- Seleccionar --</option>
-                            <option value="">Seleccionar</option>
                             <option value="1">Estudiante</option>
                             <option value="2">Profesor</option>                            
                             <option value="3">Jubilado</option>
                             <option value="4">Ingeniero</option>
-                            <option value="4">Otro</option>
+                            <option value="5">Otro</option>
                         </select>
                     </td>
                 </tr>
