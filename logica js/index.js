@@ -14,7 +14,6 @@
  *  - mostrar el servicio que más se presto en la mañana y en la tarde.
  */
 
-
 //************************ */
 //Declaración de variables
 //************************ */
@@ -26,128 +25,164 @@ let setServicios = []
     , serviciosTarde = []
 
 
-let servicio =  
-{
-    jornada: 0,
-    servicio: 0,
-    valor: 0
-};
-
-let ejecutarPrograma =  1;
-    //1.Mañana,  2.Tarde
+let ejecutarPrograma = 1;
+//1.Mañana,  2.Tarde
 let inputJornada = 0
     //1.Gasolina, 2.Montallantas, 3.Lavadero
     , inputServicio = 0
     , inputValorServicio = 0;
 
-
-while(ejecutarPrograma === 1) 
+while (ejecutarPrograma === 1) 
 {
+    //Secrea un objeto para almacenar la informacion del servicio
+    let servicio = {
+        jornada: 0,
+        servicio: 0,
+        valor: 0
+    };
+
     //Ingreso de la jornada 
-    while(inputJornada === 0 || inputJornada !== 1 || inputJornada !== 2)
-    {
-        inputJornada =  parseInt(prompt("Ingrese la jornada \n1.Mañana \n2.Tarde"));
-        //Si la entrada no ex un valor valido se vuelve a preguntar
-        if(inputJornada === 1 || inputJornada === 2)
-        {
+    while (true) {
+        inputJornada = parseInt(prompt("Ingrese la jornada \n1.Mañana \n2.Tarde"));
+        if (inputJornada === 1 || inputJornada === 2) {
             servicio.jornada = inputJornada;
             break;
-        }
-        else
-        {
-            alert('Entrada para la jornada no valida');
+        } else {
+            alert('Entrada para la jornada no válida');
         }
     }
 
     //Ingreso del servicio
-    while(inputServicio === 0 
-        || inputServicio !== 1 
-        || inputServicio !== 2 
-        || inputServicio !== 3)
-    {
+    while (true) {
         inputServicio = parseInt(prompt("Ingrese la descripción del servicio\n1.Gasolina\n2.Montallantas\n3.Lavadero"));
-        if(inputServicio === 1
-            || inputServicio === 2
-            || inputServicio === 3 )
-        {
+        if (inputServicio === 1 || inputServicio === 2 || inputServicio === 3) {
             servicio.servicio = inputServicio;
             break;
-        }
-        else
-        {
-            alert("Entrada para el servicio no valida", inputServicio);             
+        } else {
+            alert("Entrada para el servicio no válida");
         }
     }
-    
-    //Ingreso del valor del servicio
-    while(inputValorServicio === 0 || inputValorServicio < 0)
-    {
-        inputValorServicio = prompt("Ingrese el valor del servicio $:");
-        if(inputServicio > 0)
-        {
-            servicio.valor = inputValorServicio;
 
+    //Ingreso del valor del servicio
+    while (true) {
+        inputValorServicio = parseFloat(prompt("Ingrese el valor del servicio $:"));
+        if (inputValorServicio > 0) {
+            servicio.valor = inputValorServicio;
             break;
-        }
-        else
-        {
-            alert("Entrada al valor del servicio invalida.");
+        } else {
+            alert("Entrada al valor del servicio no válida.");
         }
     }
-    
-    //Se agrega el servicio a el array de servicios
+
+    //Se agrega el servicio al array de servicios
     setServicios.push(servicio);
+
+    //Agregar el servicio a la jornada correspondiente
+    //1.Mañana,  2.Tarde
+    if (servicio.jornada === 1) {
+        serviciosManana.push(servicio);
+    } else {
+        serviciosTarde.push(servicio);
+    }
 
     //Se reinician banderas
     inputJornada = 0;
     inputServicio = 0;
     inputValorServicio = 0;
 
-    ejecutarPrograma = parseInt(prompt("¿Desea ingresar otro servicio?\n1.Sí\n2.No\nCualquier otro valor sera tomado como NO."));
-
-    
+    ejecutarPrograma = parseInt(prompt("¿Desea ingresar otro servicio?\n1.Sí\nCualquier otro valor será tomado como NO."));
 }
 
+//Se separan por tipo de servicio
 //1.Gasolina, 2.Montallantas, 3.Lavadero
- setServicios.filter((element) => element.servicio === 1);
- 
-  //cantidad total de los servicios de Montallanta es $ ${serviciosMontallanta.length}`);.
-console.log(`La cantidad total de los servicios de Lavadero es $ ${serviciosLavadero.lengt}`);
-console.log(`El valor total de los servicios de Gasolina es $ ${obtenerTotal(serviciosGasolina)}`);
-console.log(`El valor total de los servicios de Montallanta es $ ${obtenerTotal(serviciosMontallanta)}`);
-console.log(`El valor total de los servicios de Lavadero es $ ${obtenerTotal(serviciosLavadero)}`);
+serviciosGasolina = setServicios.filter(element => element.servicio === 1);
+serviciosMontallanta = setServicios.filter(element => element.servicio === 2);
+serviciosLavadero = setServicios.filter(element => element.servicio === 3);
+
+//**********************************************************************
+//                  Valor producido por cada servicio
+//**********************************************************************
+let mensaje = 'El valor total de los servicios de';
+console.log(`${mensaje} Gasolina es $${obtenerTotal(serviciosGasolina)}`);
+console.log(`${mensaje} Montallanta es $${obtenerTotal(serviciosMontallanta)}`);
+console.log(`${mensaje} Lavadero es $${obtenerTotal(serviciosLavadero)}`);
+
+//**********************************************************************
+//                  Valor producido por cada jornada (pendiente)
+//**********************************************************************
+mensaje = 'el valor total de la jornada de la';
+console.log(`${mensaje} mañana es $${obtenerTotal(serviciosManana)}`)
+console.log(`${mensaje} tarde es $${obtenerTotal(serviciosTarde)}`)
+
+//**********************************************************************
+//             Cantidad de veces que se presto cada servicio
+//**********************************************************************
+mensaje = 'Cantidad total de servicios de',
+console.log(`${mensaje} Gasolina: ${serviciosGasolina.length}`);
+console.log(`${mensaje} Montallanta: ${serviciosMontallanta.length}`);
+console.log(`${mensaje} Lavadero: ${serviciosLavadero.length}`);
 
 
-/// Servicio más solicitado en la mañana
-let conteoServiciosManana = [
-    serviciosManana.filter(element => element.servicio === 1).length,
-    serviciosManana.filter(element => element.servicio === 2).length,
-    serviciosManana.filter(element => element.servicio === 3).length
-];
+//**********************************************************************
+//          Cantidad de servicios prestados por jornada
+//**********************************************************************
+mensaje = 'La cantidad de servicios en la jornada de la';
+console.log(`${mensaje} mañana es ${serviciosManana.length}`)
+console.log(`${mensaje} tarde es s${serviciosTarde.length}`)
 
-let maxManana = Math.max(...conteoServiciosManana);
-let servicioMasManana = conteoServiciosManana.indexOf(maxManana) + 1;
-console.log(`El servicio más prestado en la mañana fue: ${servicioMasManana === 1 ? 'Gasolina' : servicioMasManana === 2 ? 'Montallantas' : 'Lavadero'}`);
+//**********************************************************************
+//                  Servicio más solicitado por jornada
+//**********************************************************************
+mensaje =  'El servicio más prestado en la';
+let servicioMasManana = obtenerServicioMasPrestado(serviciosManana);
+console.log(`${mensaje} mañana fue: ${servicioMasManana}`);
+let servicioMasTarde = obtenerServicioMasPrestado(serviciosTarde);
+console.log(`${mensaje} tarde fue: ${servicioMasTarde}`);
 
-// Servicio más solicitado en la tarde
-let conteoServiciosTarde = [
-    serviciosTarde.filter(element => element.servicio === 1).length,
-    serviciosTarde.filter(element => element.servicio === 2).length,
-    serviciosTarde.filter(element => element.servicio === 3).length
-];
 
-let maxTarde = Math.max(...conteoServiciosTarde);
-let servicioMasTarde = conteoServiciosTarde.indexOf(maxTarde) + 1;
-console.log(`El servicio más prestado en la tarde fue: ${servicioMasTarde === 1 ?'Gas olina' : servicioMasTarde === 2 ? 'Montallantas' : 'Lavadero'}`);
+//Obtiene el total de un array de servicios
+//TODO: esto se puede hacer con el reduce...
+function obtenerTotal(servicios) {
+    
+    if (servicios === 0)
+        return 0;
 
-//Obtiene el total de los array
-function obtenerTotal(setServicios)
-{
-    console.log(setServicios);
-
-    total = 0;
-    setServicios.forEach(element => {
+    let total = 0;
+    servicios.forEach(element => {
         total += element.valor;
     });
     return total;
+}
+
+//Obtiene los servicios más prestado de un array de servicios
+function obtenerServicioMasPrestado(servicios) {
+    
+    //Se retorna si no hay valores
+    if(servicios.length === 0)
+        return "No se prestaron servicios";
+
+    //Se almacenan la cantidad de servicios organizados
+    //1.Gasolina, 2.Montallantas, 3.Lavadero
+    let conteoServicios = [
+        servicios.filter(element => element.servicio === 1).length,
+        servicios.filter(element => element.servicio === 2).length,
+        servicios.filter(element => element.servicio === 3).length
+    ];
+
+    //Se obtiene el maximo número de servicio
+    let maxServicio = Math.max(...conteoServicios);
+
+    //Conociendo el orden de los indices se obtienen los nombres de los servicios
+    let nombresServicios = conteoServicios
+        //Se encuentra el indice en el que se encuentra el valor mas alto de los servicios
+        .map((valorActual, index) => valorActual === maxServicio ? index + 1 : null)
+        //Se filtra toda la información nula
+        .filter(servicio => servicio !== null)
+        //Para cada iteración que queda  se busca el indice y se concatena con y
+        .map(servicio =>
+            servicio === 1 ? 'Gasolina' :
+            servicio === 2 ? 'Montallantas' : 'Lavadero'
+        ).join(' y ');
+
+    return nombresServicios;
 }
