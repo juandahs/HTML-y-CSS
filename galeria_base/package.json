@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "galeria_base",
   "version": "1.0.0",
   "main": "index.js",
