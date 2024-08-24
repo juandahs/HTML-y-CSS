@@ -128,7 +128,7 @@ console.log(`${mensaje} Lavadero: ${serviciosLavadero.length}`);
 //**********************************************************************
 mensaje = 'La cantidad de servicios en la jornada de la';
 console.log(`${mensaje} mañana es ${serviciosManana.length}`)
-console.log(`${mensaje} tarde es s${serviciosTarde.length}`)
+console.log(`${mensaje} tarde es ${serviciosTarde.length}`)
 
 //**********************************************************************
 //                  Servicio más solicitado por jornada
