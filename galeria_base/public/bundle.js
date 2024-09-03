@@ -1,6 +1,6 @@
 'use strict';
 
-var data = {
+var dataFotos = {
 	fotos: {
 		america: [
 			{
@@ -431,7 +431,7 @@ var data = {
 	},
 };
 
-const {fotos} = data;
+const {fotos} = dataFotos;
 
 var dataCategorias = {
     categorias:
@@ -446,7 +446,7 @@ var dataCategorias = {
 };
 
 const {categorias} = dataCategorias;
-const contenedorCategorias = document.getElementById('categorias');
+const contenedorCategorias$1 = document.getElementById('categorias');
 categorias.forEach(categoria => 
     {
         //const nuevaCategoria = document.createElement('a');
@@ -461,7 +461,7 @@ categorias.forEach(categoria =>
         //nuevaCategoria.dataset.categoria = `${categoria.nombre}`;
         //contenedorCategorias.append(nuevaCategoria);
 
-        contenedorCategorias.innerHTML +=
+        contenedorCategorias$1.innerHTML +=
             `
                 <a href="#" class="categoria" data-categoria="${categoria.nombre}">
                     <img class="categoria__img" src="${categoria.imagenPortada}" alt="${categoria.nombre}" />
@@ -472,3 +472,19 @@ categorias.forEach(categoria =>
                 </a>
             `;
     });
+
+const contenedorCategorias = document.getElementById('categorias');
+const galeria = document.getElementById('galeria');
+contenedorCategorias.addEventListener('click', event =>
+    {        
+        event.preventDefault();
+        //Se valida si el click esta en la etiqueta a
+        if(event.target.closest('a')){
+            galeria.classList.add('galeria--active');
+           //Eliminar scroll vertical del documento
+           document.body.style.overflow = 'hidden';
+           
+
+        }
+    }
+);
