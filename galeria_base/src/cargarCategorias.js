@@ -15,10 +15,9 @@ categorias.forEach(categoria =>
         //nuevaCategoria.href = '#';
         //nuevaCategoria.dataset.categoria = `${categoria.nombre}`;
         //contenedorCategorias.append(nuevaCategoria);
-
         contenedorCategorias.innerHTML +=
             `
-                <a href="#" class="categoria" data-categoria="${categoria.nombre}">
+                <a href="#" class="categoria" data-categoria="${categoria.id}">
                     <img class="categoria__img" src="${categoria.imagenPortada}" alt="${categoria.nombre}" />
                     <div class="categoria__datos">
                         <p class="categoria__nombre">${categoria.nombre}</p>

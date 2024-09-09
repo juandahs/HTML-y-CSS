@@ -1,0 +1,43 @@
+/* Asegúrate de que el HTML y el body ocupen el 100% de la altura */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* El contenedor principal debe ocupar el 100% menos la altura del footer */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* El main ocupa el espacio restante entre el nav y el footer */
+main {
+    flex: 1;
+    margin: 20px;
+}
+
+/* Barra de búsqueda centrada */
+.searchBar {
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Ajusta la anchura del row de las cards */
+.container {
+    margin-top: 25px;
+    max-width: 90%;
+    display: flex;
+    gap: 20px; /* Espacio uniforme entre las cards */
+    flex-wrap: wrap; /* Permite que las cards se ajusten automáticamente al espacio disponible */
+}
+
+/* El footer queda al final */
+footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}

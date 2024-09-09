@@ -460,10 +460,9 @@ categorias.forEach(categoria =>
         //nuevaCategoria.href = '#';
         //nuevaCategoria.dataset.categoria = `${categoria.nombre}`;
         //contenedorCategorias.append(nuevaCategoria);
-
         contenedorCategorias$1.innerHTML +=
             `
-                <a href="#" class="categoria" data-categoria="${categoria.nombre}">
+                <a href="#" class="categoria" data-categoria="${categoria.id}">
                     <img class="categoria__img" src="${categoria.imagenPortada}" alt="${categoria.nombre}" />
                     <div class="categoria__datos">
                         <p class="categoria__nombre">${categoria.nombre}</p>
@@ -473,18 +472,95 @@ categorias.forEach(categoria =>
             `;
     });
 
-const contenedorCategorias = document.getElementById('categorias');
-const galeria = document.getElementById('galeria');
-contenedorCategorias.addEventListener('click', event =>
-    {        
-        event.preventDefault();
-        //Se valida si el click esta en la etiqueta a
-        if(event.target.closest('a')){
-            galeria.classList.add('galeria--active');
-           //Eliminar scroll vertical del documento
-           document.body.style.overflow = 'hidden';
-           
+const galeria$3 = document.getElementById('galeria');
+const cargarImagen  = (id, nombre, ruta, descripcion) =>
+{
+    galeria$3.querySelector('.galeria__imagen').src = ruta;
+    galeria$3.querySelector('.galeria__imagen').dataset.idImagen = id;
+    galeria$3.querySelector('.galeria__titulo').innerText = nombre;
+    galeria$3.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
+};
 
+const cargarAnteriorSiguiente =  (direccion)=> {
+    const contenedor = document.getElementById('categorias').dataset.categoria;
+    console.log(contenedor);
+    const categoriaActual = galeria$3.dataset.categoria;
+    const fotos = dataFotos.fotos[categoriaActual];
+    const idImagenActual = parseInt(galeria$3.querySelector('.galeria__imagen').dataset.idImagen);
+    console.log(galeria$3.dataset);
+    fotos.forEach((element, i) => {
+        if(element.id === idImagenActual);
+    });
+
+    if(direccion === 'siguiente'){
+        console.log('cargando sigueinte');
+    }
+    else {
+        console.log('cargando anterior');
+
+    }
+    
+};
+
+const contenedorCategorias = document.getElementById('categorias');
+const galeria$2 = document.getElementById('galeria');
+
+//const {fotos} = dataFotos;
+contenedorCategorias.addEventListener('click', event => {   
+    event.preventDefault();
+    //Se valida si el click esta en la etiqueta a
+    if(event.target.closest('a')){
+        galeria$2.classList.add('galeria--active');
+        //Eliminar scroll vertical del documento
+        document.body.style.overflow = 'hidden';
+        //Extraer el id para buscar la imagen
+        const categoriaActiva = event.target.closest('a').dataset.categoria;   
+        const fotos = dataFotos.fotos[categoriaActiva];
+        const {id, nombre, ruta, descripcion} = fotos[0];
+        cargarImagen(id, nombre, ruta, descripcion);
+
+        //cargar carrusel
+        const carrusel = galeria$2.querySelector('.galeria__carousel-slides');
+        carrusel.innerHTML = '';
+
+        fotos.forEach(element => {
+            const slide = `
+                <a href="#" class="galeria__carousel-slide">
+                    <img class="galeria__carousel-image" src="${element.ruta}"  datas-id="${element.id}"alt="" />
+                </a>
+            `;
+
+            galeria$2.querySelector('.galeria__carousel-slides').innerHTML += slide;
+        });
+
+        galeria$2.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
         }
     }
 );
+
+const galeria$1 =  document.getElementById('galeria');
+
+function cerrarGaleria()
+{
+    galeria$1.classList.remove('galeria--active');
+    document.body.style.overflow = '';
+}
+
+const galeria = document.getElementById('galeria');
+
+galeria.addEventListener('click', (event) => 
+    {
+        const  boton = event.target.closest('button');
+        
+        if(boton?.dataset?.accion === 'cerrar-galeria'){
+            cerrarGaleria();
+        }
+        if(boton?.dataset?.accion === 'siguiente-imagen'){
+            cargarAnteriorSiguiente('siguiente');
+        }
+
+        if(boton?.dataset?.accion === 'anterior-imagen'){
+            cargarAnteriorSiguiente('anterior');
+        }
+
+    });

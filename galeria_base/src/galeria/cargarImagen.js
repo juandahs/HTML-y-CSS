@@ -1,0 +1,36 @@
+import data from '../data/fotos';
+
+const galeria = document.getElementById('galeria');
+const cargarImagen  = (id, nombre, ruta, descripcion) =>
+{
+    galeria.querySelector('.galeria__imagen').src = ruta;
+    galeria.querySelector('.galeria__imagen').dataset.idImagen = id;
+    galeria.querySelector('.galeria__titulo').innerText = nombre;
+    galeria.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
+}
+
+const cargarAnteriorSiguiente =  (direccion)=> {
+    const contenedor = document.getElementById('categorias').dataset.categoria
+    console.log(contenedor);
+    const categoriaActual = galeria.dataset.categoria;
+    const fotos = data.fotos[categoriaActual];
+    const idImagenActual = parseInt(galeria.querySelector('.galeria__imagen').dataset.idImagen);
+    console.log(galeria.dataset)
+    let indexImagenActual;
+    fotos.forEach((element, i) => {
+        if(element.id === idImagenActual){
+            indexImagenActual = i;   
+        }
+    });
+
+    if(direccion === 'siguiente'){
+        console.log('cargando sigueinte')
+    }
+    else{
+        console.log('cargando anterior')
+
+    }
+    
+};
+
+export {cargarImagen, cargarAnteriorSiguiente};
