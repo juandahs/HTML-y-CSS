@@ -1,9 +1,24 @@
-/* Asegúrate de que el HTML y el body ocupen el 100% de la altura */
+
 html, body {
     height: 100%;
     margin: 0;
 }
 
+.row{
+    margin-top: 2%;
+    margin-right: 10px;
+}
+
+.card-title{
+    text-align: center;
+}
+
+/* Ajustar el tamaño de la imagen dentro de la tarjeta */
+.card-img-top {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: 150px; /* Ajusta la altura según tus necesidades */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  }
 /* El contenedor principal debe ocupar el 100% menos la altura del footer */
 body {
     display: flex;
