@@ -1,16 +1,25 @@
 import * as pokemonService from './pokemonService.js';
+import config from '../appSettings.js';
+;
 
 // Se espera a que se cargue todo el documento
 document.addEventListener("DOMContentLoaded", function () {
     // Se obtienen los controles
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
+    const nextButton = document.getElementById('nextButton');
+    const previusButton = document.getElementById('previousButton');
     const cardContainer = document.getElementById('cardContainer');
 
     let cards = [];
+    let totalPokemon;
+    let urlNext;
+    let urlPrevious;
+    
+    
 
     // Se cargan los primeros 6 Pokémon
-    pokemonService.getPagination(6, loadPokemons, handleError);
+    pokemonService.getPagination(config.urlBase+config.endPointPaginadoBase, loadPokemons, handleError);
 
     // Evento para buscar un Pokémon
     searchButton.addEventListener('click', async (event) => {
@@ -29,14 +38,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    //Evento del boton siguiente.
+    nextButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        cards = [];        
+        pokemonService.getPagination(urlNext, loadPokemons, handleError);
+    });
+
+    //Evento del boton anterior
+    previusButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        cards = [];           
+        pokemonService.getPagination(urlPrevious, loadPokemons, handleError);
+    });
+
     // Cargar el listado de los Pokémon
     function loadPokemons(data) {
+        totalPokemon = data.total;
+        urlNext = data.next;
+        urlPrevious = data.previous;
         data.pokemonsNames.forEach(pokemon => {
             pokemonService.getPokemon(pokemon.name, addCard, handleError);
         });
     }
 
-    // Agregar tarjeta a la lista
+    // Agregar tarjeta a la lista organizada
     function addCard(pokemonData) {
         cards.push(pokemonData);
         cards.sort((a, b) => a.id - b.id); // Ordenar las tarjetas por id

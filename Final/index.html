@@ -34,7 +34,7 @@
 
     <!-- imagenes -->
 
-    <div id="cardContainer" class="row row-cols-1 row-cols-md-3 g-4">
+    <section id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
       <!-- Se cargan dinamicamente las tarjetas-->
 
       <!-- <div class="col">
@@ -50,24 +50,26 @@
           </div>  
         </div> -->
 
-    </div>
+    </section>
 
     <!-- Paginación -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="#" id="previousPage" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <!-- Los enlaces de paginación se agregarán dinámicamente aquí -->
-        <li class="page-item">
-          <a class="page-link" href="#" id="nextPage" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+     <section>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" id="previousButton" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>          
+          <li class="page-item">
+            <a class="page-link" href="#" id="nextButton" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+     </section>
+    
   </main>
   <footer>
     <p>&copy; <span id="year"></span> Juan. Todos los derechos reservados.</p>

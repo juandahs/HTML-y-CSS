@@ -4,10 +4,7 @@ const urlApi = 'https://pokeapi.co/api/v2';
 export async function getPokemon(name, callback, errorCallback) {
     const url = `${urlApi}/pokemon/${name}`;
     try {
-        const response = await $.ajax({
-            method: 'GET',
-            url: url
-        });
+        const response = await fetchData(url);
 
         const pokemonData = {
             id: response.id,
@@ -23,15 +20,10 @@ export async function getPokemon(name, callback, errorCallback) {
     }
 }
 
-//Obtiene los primeros 'limit' pokemones
-export async function getPagination(limit, callback, errorCallback) {
-    const url = `${urlApi}/pokemon?limit=${limit}`;
+//obtiene le paginado de los pokemons
+export async function getPagination(url, callback, errorCallback) {    
     try {
-        const response = await $.ajax({
-            method: 'GET',
-            url: url
-        });
-        
+        const response = await fetchData(url);        
         // Obtener las URLs de los Pokémon y sus nombres
         const pokemonsNames = response.results.map(result => ({
             name: result.name
@@ -39,6 +31,8 @@ export async function getPagination(limit, callback, errorCallback) {
         
         const data = {
             total: response.count,
+            next : response.next,
+            previous: response.previous,
             pokemonsNames: pokemonsNames
         };
 
@@ -48,4 +42,8 @@ export async function getPagination(limit, callback, errorCallback) {
     }
 }
 
+
+export async function fetchData(url) {
+        return await $.ajax({method: 'GET', url: url});    
+}
 
