@@ -1,5 +1,6 @@
 import { cargarAnteriorSiguiente } from "./cargarImagen";
 import cerrarGaleria from "./cerrarGaleria";
+import slideClick from "./slideClick";
 
 const galeria = document.getElementById('galeria');
 
@@ -10,6 +11,12 @@ galeria.addEventListener('click', (event) =>
         if(boton?.dataset?.accion === 'cerrar-galeria'){
             cerrarGaleria();
         }
+
+        if(event.target.dataset.id){
+            alert('sadasd')
+            slideClick(event);
+        }
+
         if(boton?.dataset?.accion === 'siguiente-imagen'){
             cargarAnteriorSiguiente('siguiente');
         }
@@ -17,5 +24,14 @@ galeria.addEventListener('click', (event) =>
         if(boton?.dataset?.accion === 'anterior-imagen'){
             cargarAnteriorSiguiente('anterior');
         }
+
+        if(boton?.dataset?.accion === 'siguiente-slide'){
+            cargarAnteriorSiguiente('siguiente');
+        }
+
+        if(boton?.dataset?.accion === 'anterior-slide'){
+            cargarAnteriorSiguiente('anterior');
+        }
+
 
     });

@@ -1,30 +1,27 @@
 import * as pokemonService from './pokemonService.js';
 
-
-//Se espera a que se cargue todo el documetno
+// Se espera a que se cargue todo el documento
 document.addEventListener("DOMContentLoaded", function () {
-
-    //Se obtiene controles
+    // Se obtienen los controles
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
+    const cardContainer = document.getElementById('cardContainer');
 
-    //Se cargan los primeros 6 pokemones
-    pokemonService.getPagination(6, Load, handleError);
+    let cards = [];
 
-    //Evento para buscar un pokemon
+    // Se cargan los primeros 6 Pokémon
+    pokemonService.getPagination(6, loadPokemons, handleError);
+
+    // Evento para buscar un Pokémon
     searchButton.addEventListener('click', async (event) => {
-
         try {
-            //Si se esta realizando una busqueda vacia se coloca el foco en el input y se termina el proceso.
+            // Si se está realizando una búsqueda vacía, se coloca el foco en el input y se termina el proceso
             if (searchInput.value === '') {
-                console.log('vacio')
                 searchInput.focus();
                 return;
             }
 
-            pokemonService.getPokemon(searchInput.value, createCard, handleError);
-
-
+            await pokemonService.getPokemon(searchInput.value, createCard, handleError);
         } catch (error) {
             searchInput.value = '';
             searchInput.focus();
@@ -32,39 +29,49 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    //Carga el listado de los pokemones
-    function Load(data) {
+    // Cargar el listado de los Pokémon
+    function loadPokemons(data) {
         data.pokemonsNames.forEach(pokemon => {
-            pokemonService.getPokemon(pokemon.name, createCard, handleError);
+            pokemonService.getPokemon(pokemon.name, addCard, handleError);
         });
     }
 
-    //Cargar tarjetas
-    function createCard(pokemonData) {
-
-        const cardContainer = document.getElementById('cardContainer');
-        cardContainer.innerHTML += `
-          <div class="col">
-          <div class="card h-100">
-            <input type="hidden" id="${pokemonData.id}">
-            <img src="${pokemonData.img}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">${pokemonData.nombre}</h5>
-              <p class="card-text">Este Pokémon es de tipo ${pokemonData.tipo}.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>  
-        </div>
-        `;
+    // Agregar tarjeta a la lista
+    function addCard(pokemonData) {
+        cards.push(pokemonData);
+        cards.sort((a, b) => a.id - b.id); // Ordenar las tarjetas por id
+        renderCards();
     }
 
-    //Manejo de errores
+    // Renderizar tarjetas en el contenedor
+    function renderCards() {
+        cardContainer.innerHTML = '';
+        cards.forEach(pokemon => {
+            cardContainer.innerHTML += `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="${pokemon.img}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${pokemon.nombre}</h5>
+                            <p class="card-text">Este Pokémon es de tipo ${pokemon.tipo}.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Crear tarjeta y añadirla a la lista
+    function createCard(pokemonData) {
+        addCard(pokemonData);
+    }
+
+    // Manejo de errores
     function handleError() {
         searchInput.value = '';
         searchInput.focus();
     }
-
-
-})
+});

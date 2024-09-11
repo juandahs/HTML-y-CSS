@@ -15,7 +15,10 @@ contenedorCategorias.addEventListener('click', event => {
         //Extraer el id para buscar la imagen
         const categoriaActiva = event.target.closest('a').dataset.categoria;   
         const fotos = dataFotos.fotos[categoriaActiva];
+
+        galeria.dataset.categoria = categoriaActiva;
         const {id, nombre, ruta, descripcion} = fotos[0];
+
         cargarImagen(id, nombre, ruta, descripcion);
 
         //cargar carrusel

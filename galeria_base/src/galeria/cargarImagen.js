@@ -7,30 +7,56 @@ const cargarImagen  = (id, nombre, ruta, descripcion) =>
     galeria.querySelector('.galeria__imagen').dataset.idImagen = id;
     galeria.querySelector('.galeria__titulo').innerText = nombre;
     galeria.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
-}
 
-const cargarAnteriorSiguiente =  (direccion)=> {
-    const contenedor = document.getElementById('categorias').dataset.categoria
-    console.log(contenedor);
     const categoriaActual = galeria.dataset.categoria;
     const fotos = data.fotos[categoriaActual];
     const idImagenActual = parseInt(galeria.querySelector('.galeria__imagen').dataset.idImagen);
-    console.log(galeria.dataset)
-    let indexImagenActual;
-    fotos.forEach((element, i) => {
+
+    
+    let indexImagenActual;    
+    fotos.forEach((element, i) => {        
+        if(element.id === idImagenActual){
+            indexImagenActual = i;   
+        }
+    });
+
+    
+    //colocar recuadro blanco
+    if(galeria.querySelectorAll('.galeria__carousel-slide').lenght > 0){
+        //eliminamos el recuadro de la imagen anterior.
+        galeria.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
+
+        galeria.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
+
+    }
+}
+
+const cargarAnteriorSiguiente =  (direccion)=> 
+{    
+    const categoriaActual = galeria.dataset.categoria;
+    const fotos = data.fotos[categoriaActual];
+    const idImagenActual = parseInt(galeria.querySelector('.galeria__imagen').dataset.idImagen);
+    
+    let indexImagenActual;    
+    fotos.forEach((element, i) => {        
         if(element.id === idImagenActual){
             indexImagenActual = i;   
         }
     });
 
     if(direccion === 'siguiente'){
-        console.log('cargando sigueinte')
+        //Se valida que si se pueda sumar un 1 
+        if(fotos[indexImagenActual+1]){
+            const {id, nombre, ruta, descripcion}  = fotos[indexImagenActual+1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
     }
     else{
-        console.log('cargando anterior')
-
-    }
-    
+        if(fotos[indexImagenActual-1]){
+            const {id, nombre, ruta, descripcion}  = fotos[indexImagenActual-1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
+    }    
 };
 
 export {cargarImagen, cargarAnteriorSiguiente};
