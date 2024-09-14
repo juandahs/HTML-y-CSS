@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let cards = [];
     let totalPokemon;
     let urlNext;
-    let urlPrevious;
-    
+    let urlPrevious;   
     
 
     // Se cargan los primeros 6 Pokémon

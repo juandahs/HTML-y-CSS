@@ -1,6 +1,7 @@
 import { cargarAnteriorSiguiente } from "./cargarImagen";
 import cerrarGaleria from "./cerrarGaleria";
 import slideClick from "./slideClick";
+import carousel  from "./carousel";
 
 const galeria = document.getElementById('galeria');
 
@@ -26,11 +27,11 @@ galeria.addEventListener('click', (event) =>
         }
 
         if(boton?.dataset?.accion === 'siguiente-slide'){
-            cargarAnteriorSiguiente('siguiente');
+            carousel('siguiente');
         }
 
         if(boton?.dataset?.accion === 'anterior-slide'){
-            cargarAnteriorSiguiente('anterior');
+            carousel('anterior');
         }
 
 
