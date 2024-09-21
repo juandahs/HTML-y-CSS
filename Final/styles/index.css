@@ -1,0 +1,98 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+footer, body {
+    background-image: url('https://img.freepik.com/foto-gratis/paisaje-magico-fantasia_23-2151502920.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726704000&semt=ais_hybrid'); /* Reemplaza con tu imagen */
+    background-size: cover; /* La imagen cubrirá todo el fondo */
+    background-position: center; /* Centra la imagen de fondo */
+    background-attachment: fixed; /* La imagen se mantendrá fija al hacer scroll */
+    background-repeat: no-repeat;
+    color: #fff; /* Establece el color del texto en blanco para mejor visibilidad */
+}
+
+/* Espaciado entre las tarjetas y sus lados */
+.row {
+    margin-top: 2%;
+    margin-left: 0; /* Elimina márgenes innecesarios a la izquierda */
+    margin-right: 0; /* Elimina márgenes innecesarios a la derecha */
+    justify-content: center; /* Asegura que las tarjetas estén centradas */
+}
+
+/* Margen y espaciado entre las tarjetas */
+.col {
+    margin-bottom: 20px; /* Espacio vertical entre las tarjetas */
+    padding-left: 10px; /* Espacio lateral entre las tarjetas */
+    padding-right: 10px; /* Espacio lateral entre las tarjetas */
+}
+
+/* Contenedor de las tarjetas, evita que se peguen a los bordes */
+#cardContainer {
+    padding-left: 20px; /* Espacio izquierdo del contenedor */
+    padding-right: 20px; /* Espacio derecho del contenedor */
+    margin-left: auto; /* Centra el contenido dentro del contenedor */
+    margin-right: auto; /* Centra el contenido dentro del contenedor */
+    display: flex;
+    flex-wrap: wrap; /* Asegura que las tarjetas se ajusten automáticamente al tamaño disponible */
+    gap: 20px; /* Espacio entre tarjetas */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+}
+
+/* Bordes redondeados en las tarjetas */
+.card {
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto de elevación */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+    width: 18rem; /* Ajusta esta medida según necesites */
+    margin: auto;
+}
+
+.card-title {
+    text-align: center;
+}
+
+/* Ajustar el tamaño de la imagen dentro de la tarjeta */
+.card-img-top {
+    border-top-left-radius: 15px; /* Bordes redondeados superiores */
+    border-top-right-radius: 15px; /* Bordes redondeados superiores */
+    object-fit: contain;
+    height: 200px;
+    width: auto;
+}
+
+/* El contenedor principal debe ocupar el 100% menos la altura del footer */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* El main ocupa el espacio restante entre el nav y el footer */
+main {
+    flex: 1;
+    margin: 20px;
+}
+
+/* Barra de búsqueda centrada */
+.searchBar {
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* El footer queda al final */
+footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Para evitar que las tarjetas queden pegadas a los bordes */
+body, main {
+    padding: 0 20px;
+}

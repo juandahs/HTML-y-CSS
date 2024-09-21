@@ -11,28 +11,67 @@ document.addEventListener("DOMContentLoaded", function () {
     const previusButton = document.getElementById('previousButton');
     const cardContainer = document.getElementById('cardContainer');
 
-    let cards = [];
-    let totalPokemon;
+    let cards = [];    
     let urlNext;
-    let urlPrevious;   
-    
+    let urlPrevious;
 
-    // Se cargan los primeros 6 Pokémon
-    pokemonService.getPagination(config.urlBase+config.endPointPaginadoBase, loadPokemons, handleError);
+    // Se cargan los primeros 8 Pokémon
+    pokemonService.getPagination(config.urlBase + config.endPointPaginadoBase, loadPokemons, handleError);
 
     // Evento para buscar un Pokémon
     searchButton.addEventListener('click', async (event) => {
         try {
-            // Si se está realizando una búsqueda vacía, se coloca el foco en el input y se termina el proceso
+            if (searchInput.value === '') {
+                searchInput.focus();
+                return;
+            }
+            pokemonService.getPokemon(searchInput.value, showPopup, handleError);
+        } catch (error) {
+            console.error('Error al buscar el Pokémon:', error);
+        }
+    });
+
+
+    function showPopup(pokemonData) {
+        // Elimina el scroll
+        document.body.style.overflow = 'hidden';
+      
+        const popupContainer = document.createElement('div');
+        popupContainer.className = 'popup-container';
+        document.body.appendChild(popupContainer);
+      
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.innerHTML = `
+          <div class="popup-content">
+            <button class="close-button">&times;</button>
+            <h2>${pokemonData.nombre}</h2>
+            <p>Tipo: ${pokemonData.tipo}</p>           
+            <img src="${pokemonData.img}" alt="${pokemonData.nombre}" class="popup-image">
+          </div>
+        `;
+        popupContainer.appendChild(popup);
+      
+        const closeButton = popup.querySelector('.close-button');
+        closeButton.addEventListener('click', () => {
+          // Eliminar todo lo relacionado con el popup
+          popup.remove();
+          popupContainer.remove();
+          document.body.style.overflow = 'auto'; // Restaurar el scroll
+        });
+      }
+
+    
+
+    searchButton.addEventListener('click', async (event) => {
+        try {
             if (searchInput.value === '') {
                 searchInput.focus();
                 return;
             }
 
-            await pokemonService.getPokemon(searchInput.value, createCard, handleError);
+            pokemonService.getPokemon(searchInput.value, handlePokemonFound, handlePokemonNotFound);
         } catch (error) {
-            searchInput.value = '';
-            searchInput.focus();
             console.error('Error al buscar el Pokémon:', error);
         }
     });
@@ -40,20 +79,19 @@ document.addEventListener("DOMContentLoaded", function () {
     //Evento del boton siguiente.
     nextButton.addEventListener('click', (e) => {
         e.preventDefault()
-        cards = [];        
+        cards = [];
         pokemonService.getPagination(urlNext, loadPokemons, handleError);
     });
 
     //Evento del boton anterior
     previusButton.addEventListener('click', (e) => {
         e.preventDefault();
-        cards = [];           
+        cards = [];
         pokemonService.getPagination(urlPrevious, loadPokemons, handleError);
     });
 
     // Cargar el listado de los Pokémon
     function loadPokemons(data) {
-        totalPokemon = data.total;
         urlNext = data.next;
         urlPrevious = data.previous;
         data.pokemonsNames.forEach(pokemon => {
@@ -69,33 +107,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Renderizar tarjetas en el contenedor
-    function renderCards() {
-        cardContainer.innerHTML = '';
-        cards.forEach(pokemon => {
-            cardContainer.innerHTML += `
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="${pokemon.img}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${pokemon.nombre}</h5>
-                            <p class="card-text">Este Pokémon es de tipo ${pokemon.tipo}.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
+// Renderizar tarjetas en el contenedor
+function renderCards() {
+    cardContainer.innerHTML = '';
+    cards.forEach(pokemon => {
+        cardContainer.innerHTML += `
+            <div class="col">
+                <div class="card h-100 pokemon-card" data-name="${pokemon.nombre}">
+                    <img src="${pokemon.img}" class="card-img-top" alt="${pokemon.nombre}">
+                    <div class="card-body">
+                        <h5 class="card-title">${pokemon.nombre}</h5>
+                        <p class="card-text">Este Pokémon es de tipo ${pokemon.tipo}.</p>
                     </div>
                 </div>
-            `;
-        });
-    }
+            </div>
+        `;
+    });
+    
+    // Agrega el evento de clic a todas las tarjetas después de que se hayan renderizado
+    addClickEventToCards();
+}
 
-    // Crear tarjeta y añadirla a la lista
-    function createCard(pokemonData) {
-        addCard(pokemonData);
-    }
+// Función para agregar el evento de clic a las tarjetas
+function addClickEventToCards() {
+    const pokemonCards = document.querySelectorAll('.pokemon-card'); // Selecciona todas las tarjetas
+    
+    pokemonCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            const pokemonName = card.getAttribute('data-name'); // Obtiene el nombre del Pokémon
+            pokemonService.getPokemon(pokemonName, showPopup, handleError); // Llama a la función que ya tienes para mostrar el popup
+        });
+    });
+}
 
     // Manejo de errores
     function handleError() {
+        console.error('ocurrio un error dentro de la aplicacion')
         searchInput.value = '';
         searchInput.focus();
     }

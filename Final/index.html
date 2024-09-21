@@ -4,7 +4,8 @@
 
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/popup.css" />
   <script src="scripts/index.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -19,22 +20,22 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand">PokeDex
-      </a>
 
-    </div>
-  </nav>
   <main>
+    <!-- Imagen como título centrado -->
+    <section class="title-section text-center">
+      <img src="./img/logo.png" alt="PokeDex Título" class="img-fluid">
+    </section>
+
+
     <section class="searchBar">
       <input id="searchInput" class="form-control me-2" type="search" placeholder="Buscar pokemon" aria-label="Search">
-      <button id="searchButton" class="btn btn-success">Buscar</button>
+      <button id="searchButton" class="btn btn-primary">Buscar</button>
     </section>
 
     <!-- imagenes -->
 
-    <section id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
+    <section id="cardContainer" class="row row-cols-1 row-cols-md-5 g-2">
       <!-- Se cargan dinamicamente las tarjetas-->
 
       <!-- <div class="col">
@@ -53,14 +54,14 @@
     </section>
 
     <!-- Paginación -->
-     <section>
+    <section>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item">
             <a class="page-link" href="#" id="previousButton" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
-          </li>          
+          </li>
           <li class="page-item">
             <a class="page-link" href="#" id="nextButton" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
@@ -68,8 +69,8 @@
           </li>
         </ul>
       </nav>
-     </section>
-    
+    </section>
+
   </main>
   <footer>
     <p>&copy; <span id="year"></span> Juan. Todos los derechos reservados.</p>

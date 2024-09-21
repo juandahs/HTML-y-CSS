@@ -13,8 +13,7 @@ galeria.addEventListener('click', (event) =>
             cerrarGaleria();
         }
 
-        if(event.target.dataset.id){
-            alert('sadasd')
+        if(event.target.dataset.id){            
             slideClick(event);
         }
 

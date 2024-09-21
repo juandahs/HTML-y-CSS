@@ -1,8 +1,7 @@
-const urlApi = 'https://pokeapi.co/api/v2';
-
+import config from '../appSettings.js'
 
 export async function getPokemon(name, callback, errorCallback) {
-    const url = `${urlApi}/pokemon/${name}`;
+    const url = `${config.urlBase}/pokemon/${name}`;
     try {
         const response = await fetchData(url);
 
@@ -41,7 +40,6 @@ export async function getPagination(url, callback, errorCallback) {
         errorCallback('No se pudo encontrar el Pokémon');
     }
 }
-
 
 export async function fetchData(url) {
         return await $.ajax({method: 'GET', url: url});    
